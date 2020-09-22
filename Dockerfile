@@ -13,7 +13,17 @@ RUN apt-get update -y && \
       ${transientBuildDeps} && \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 60 \
       --slave /usr/bin/gfortran gfortran /usr/bin/gfortran-9 && \
-    update-alternatives --set gcc "/usr/bin/gcc-9" && \
+
+    apt-get install -y --no-install-recommends build-essential \
+      gcc-10>=10.0.0 \
+      gfortran-10>=10.0.0 \
+      g++-10>=10.0.0 \
+      ${transientBuildDeps} && \
+    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 70 \
+      --slave /usr/bin/gfortran gfortran /usr/bin/gfortran-10 && \
+
+
+    update-alternatives --set gcc "/usr/bin/gcc-10" && \
     gcc --version && \
     gfortran --version && \
     apt-get clean && \
@@ -27,11 +37,11 @@ ENV HOME /home/${NB_USER}
 
 USER ${NB_USER}
 RUN cd ${HOME} && \
-    git clone https://github.com/f66blog/binder_gf9.git && \
-    cd binder_gf9  && \
+    git clone https://github.com/f66blog/binder_gf10.git && \
+    cd binder_gf10  && \
     pip install --user ./jupyter-gfort-kernel  && \
     jupyter kernelspec install ./jupyter-gfort-kernel/gfort_spec --user 
 
-WORKDIR ${HOME}/binder_gf9
+WORKDIR ${HOME}/binder_gf10
 
 
