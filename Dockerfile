@@ -13,7 +13,6 @@ RUN apt-get update -y && \
       ${transientBuildDeps} && \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 60 \
       --slave /usr/bin/gfortran gfortran /usr/bin/gfortran-9 && \
-
     apt-get install -y --no-install-recommends build-essential \
       gcc-10>=10.0.0 \
       gfortran-10>=10.0.0 \
@@ -21,8 +20,6 @@ RUN apt-get update -y && \
       ${transientBuildDeps} && \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 70 \
       --slave /usr/bin/gfortran gfortran /usr/bin/gfortran-10 && \
-
-
     update-alternatives --set gcc "/usr/bin/gcc-10" && \
     gcc --version && \
     gfortran --version && \
