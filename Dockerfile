@@ -3,6 +3,7 @@ FROM jupyter/scipy-notebook:54462805efcb
 USER root
 
 RUN apt-get update -y && \
+    apt-get install apt-utils -y && \
     apt-get install -y --no-install-recommends software-properties-common && \
     add-apt-repository ppa:ubuntu-toolchain-r/test -y && \
     apt-get update -y && \
